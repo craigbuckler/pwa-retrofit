@@ -1,0 +1,25 @@
+{
+  "name": "pwa-retrofit",
+  "version": "1.0.0",
+  "description": "Retrofit PWA technologies to any website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "echo \"No tests specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craigbuckler/pwa-retrofit.git"
+  },
+  "keywords": [
+    "pwa",
+    "offline",
+    "website"
+  ],
+  "author": "Craig Buckler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/craigbuckler/pwa-retrofit/issues"
+  },
+  "homepage": "https://github.com/craigbuckler/pwa-retrofit#readme"
+}
