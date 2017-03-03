@@ -6,7 +6,82 @@ Main website JavaScript
 'use strict';
 
 // unsupported browser
-if (!window.addEventListener || !window.requestAnimationFrame || !document.getElementsByClassName) return;
+if (!window.addEventListener || !window.history || !window.requestAnimationFrame || !document.getElementsByClassName) return;
+
+
+// cache name
+const
+  CACHE = '::PWAsite',
+  offlineURL = '/offline/';
+
+// enable service worker
+if ('serviceWorker' in navigator) {
+
+  // register service worker
+  navigator.serviceWorker.register('/service-worker.js');
+
+  // populate offline page list
+  let pageList = document.getElementById('cachedpagelist');
+  if (pageList && 'caches' in window) showOfflinePages(pageList);
+
+}
+
+
+// fetch array of offline pages
+function showOfflinePages(list) {
+
+  // fetch all caches
+  window.caches.keys()
+    .then(cacheList => {
+
+      // find caches by and order by most recent
+      cacheList = cacheList
+        .filter(cName => cName.includes(CACHE))
+        .sort((a, b) => a - b);
+
+      // open first cache
+      caches.open(cacheList[0])
+        .then(cache => {
+
+          // fetch cached pages
+          cache.keys()
+            .then(reqList => {
+
+              var frag = document.createDocumentFragment();
+
+              reqList
+                .map(req => req.url)
+                .filter(req => (req.endsWith('/') || req.endsWith('.html')) && !req.endsWith(offlineURL))
+                .sort()
+                .forEach(req => {
+                  let
+                    li = document.createElement('li'),
+                    a = li.appendChild(document.createElement('a'));
+                    a.setAttribute('href', req);
+                    a.textContent = a.pathname;
+                    frag.appendChild(li);
+                });
+
+              list.appendChild(frag);
+
+            });
+
+        })
+
+    });
+
+}
+
+
+// remove URL #target after navigation animation and page unload
+window.addEventListener('unload', removeTarget, false);
+
+var nav = document.getElementById('nav');
+if (nav) nav.addEventListener('animationend', removeTarget, false);
+
+function removeTarget() {
+  history.replaceState('', document.title, location.pathname + location.search);
+}
 
 
 // progressive image loader
@@ -85,7 +160,7 @@ window.addEventListener('load', function() {
           e.target.classList.remove('reveal');
         }
 
-      });
+      }, false);
 
     }
 

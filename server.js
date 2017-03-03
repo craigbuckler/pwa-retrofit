@@ -22,7 +22,7 @@ const
     '.htm'  : ['text/html', 86400],
     '.css'  : ['text/css', 86400],
     '.js'   : ['application/javascript', 86400],
-    '.json' : ['application/json', 1800],
+    '.json' : ['application/json', 86400],
     '.jpg'  : ['image/jpeg', 0],
     '.jpeg' : ['image/jpeg', 0],
     '.png'  : ['image/png', 0],
@@ -74,7 +74,7 @@ http.createServer(function(req, res) {
 
     res.writeHead(code, {
       'Content-Type'    : head[0],
-      'Cache-Control'   : 'max-age=' + (head[1] || 2419200),
+      'Cache-Control'   : 'must-revalidate, max-age=' + (head[1] || 2419200),
       'Content-Length'  : Buffer.byteLength(content)
     });
     res.write(content);
