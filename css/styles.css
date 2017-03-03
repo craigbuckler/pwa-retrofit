@@ -226,7 +226,7 @@ figcaption {
   text-align: left;
   line-height: 1.1;
   margin-top: 0.2em;
-  color: #999;
+  color: #555;
 }
 
 @media (min-width: 60rem) {
@@ -258,11 +258,6 @@ figcaption {
   padding: 0;
   margin: 0 0 0 -50vw;
   border: 0 none;
-}
-
-.full {
-  clear: both;
-  width: 100%;
 }
 
 /* progressive image CSS */
