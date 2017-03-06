@@ -3,6 +3,8 @@ Populate offline pages list
 loaded as a separate ES6 file to ensure it is not parsed by older browsers
 */
 
+`use strict`;
+
 // cache name
 const
   CACHE = '::PWAsite',

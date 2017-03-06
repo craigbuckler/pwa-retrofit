@@ -1,4 +1,6 @@
 // configuration
+`use strict`;
+
 const
   version = '1.0.0',
   CACHE = version + '::PWAsite',
@@ -116,7 +118,10 @@ function offlineAsset(url) {
 // application fetch network data
 self.addEventListener('fetch', event => {
 
-  let url = event.request.url
+  // abandon non-GET requests
+  if (event.request.method !== 'GET') return;
+
+  let url = event.request.url;
 
   event.respondWith(
 
