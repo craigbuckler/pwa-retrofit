@@ -8,6 +8,7 @@ const
     '/manifest.json',
     '/css/styles.css',
     '/js/main.js',
+    '/js/offlinepage.js',
     '/images/logo/logo152.png'
   ].concat(offlineURL),
   installFilesDesirable = [
